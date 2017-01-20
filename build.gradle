@@ -1,0 +1,39 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            android.defaultConfig {
+                buildConfigField 'String', 'PATH_MOBILE_DATA_CHANGED', '"/mobile-data-changed"'
+                buildConfigField 'String', 'PATH_WEAR_DATA_CHANGED', '"/wear-data-changed"'
+                buildConfigField 'String', 'RENEW_PATH_DATA', '"RENEW_PATH_DATA"'
+                buildConfigField 'String', 'MAX_TEMP', '"MAX_TEMP"'
+                buildConfigField 'String', 'MIN_TEMP', '"MIN_TEMP"'
+                buildConfigField 'String', 'WEATHER_ICON', '"WEATHER_ICON"'
+                buildConfigField 'String', 'UPDATE_WEATHER', '"UPDATE_WEATHER"'
+            }
+        }
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
